@@ -1,0 +1,25 @@
+{
+	"Comment": "Last updated: 05/08/2018",
+	"copyright": " &#9400; 2018 cSteele",
+	"versions": {
+		"Application": {
+			"appA":  "1.6.5(3)",
+			"appB":  "0.6p"
+		},
+		"Driver": {
+			"driverA": "1.1d",
+			"driverB": "1.0.0"
+		},
+
+		"UpdateInfo": {
+			"Application": {
+				"appA":  "<b>Update Information: </b> Updated: 08/08/2018",
+				"appB":  "Updated: 1/1/2018"
+			},
+			"Driver": {
+				"driverA": "Updated: 05/08/2018",
+				"driverB": "Updated: 01/08/2018"
+			}
+		}
+	}
+}
