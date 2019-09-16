@@ -1,11 +1,28 @@
-/**
- *  Hubitat Import URL: 
+/*
+ * Import URL: https://raw.githubusercontent.com/HubitatCommunity/??/master/??-Driver.groovy"
+ *
+ *	Copyright 2019 your Name
+ *
+ *	Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ *	use this file except in compliance with the License. You may obtain a copy
+ *	of the License at:
+ *
+ *		http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *	Unless required by applicable law or agreed to in writing, software
+ *	distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ *	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ *	License for the specific language governing permissions and limitations
+ *	under the License.
+ *
+ *
  */
+	public static String version()      {  return "v???"  }
 
 definition(
 	name: "New App Template",
-	namespace: "YourName",
-	author: "Your Name",
+	namespace: "yourname",
+	author: "your Name",
 	description: "",
 	iconUrl: "",
 	iconX2Url: "",
@@ -123,7 +140,7 @@ def uninstalled()
 def display() {
 	section{
 	   paragraph getFormat("line")
-	   paragraph "<div style='color:#1A77C9;text-align:center;font-weight:small;font-size:9px'>Developed by: Your Name<br/>Version Status: ${thisVersion.status}<br>Current Version: v${thisVersion.major}.${thisVersion.minor} -  ${thisCopyright}</div>"
+		paragraph "<div style='color:#1A77C9;text-align:center;font-weight:small;font-size:9px'>Developed by: C Steele<br/>Version Status: $state.Status<br>Current Version: ${version()} -  ${thisCopyright}</div>"
     }
 }
 
@@ -155,8 +172,7 @@ def logsOff()
 }
 
 
-def getThisVersion()  {[status: "Beta", major: 0, minor: 2, build: 1]}
-def getThisCopyright(){"&copy; 2019 Your Name"}
+def getThisCopyright(){"&copy; 2019 your Name"}
 
 /**
 mike.maxwell (Leader)
