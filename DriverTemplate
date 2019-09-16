@@ -17,7 +17,8 @@
  *
  *
  */
- 
+ 	public static String version()      {  return "v???"  }
+
  
 import groovy.transform.Field
 
@@ -122,67 +123,5 @@ def off()
 	log.trace "Msg: $description OFF"
 }
 
-
-
-// Check Version   ***** with great thanks and acknowlegment to Cobra (CobraVmax) for his original code ****
-def updateCheck()
-{    
-	state.Version = version()
-	state.InternalName = "Your-Driver"
-	
-	def paramsUD = [uri: "https://hubitatcommunity.github.io/??/version.json"]
-	
- 	asynchttpGet("updateCheckHandler", paramsUD) 
-}
-
-def updateCheckHandler(resp, data) {
-	if (resp.getStatus() == 200 || resp.getStatus() == 207) {
-		respUD = parseJson(resp.data)
-		//log.warn " Version Checking - Response Data: $respUD"   // Troubleshooting Debug Code - Uncommenting this line should show the JSON response from your webserver 
-		state.Copyright = "${thisCopyright}"
-		def newVerRaw = (respUD.versions.Driver.(state.InternalName))
-		def newVer = (respUD.versions.Driver.(state.InternalName).replaceAll("[.vV]", ""))
-		def currentVer = state.Version.replaceAll("[.vV]", "")                
-		state.UpdateInfo = (respUD.versions.UpdateInfo.Driver.(state.InternalName))
-		state.author = (respUD.author)
-	
-		if(newVer == "NLS")
-		{
-		      state.Status = "<b>** This driver is no longer supported by $state.author  **</b>"       
-		      log.warn "** This driver is no longer supported by $state.author **"      
-		}           
-		else if(currentVer < newVer)
-		{
-		      state.Status = "<b>New Version Available (Version: $newVerRaw)</b>"
-		      log.warn "** There is a newer version of this driver available  (Version: $newVerRaw) **"
-		      log.warn "** $state.UpdateInfo **"
-		} 
-		else if(currentVer > newVer)
-		{
-		      state.Status = "<b>You are using a Test version of this Driver (Version: $newVerRaw)</b>"
-		}
-		else
-		{ 
-		    state.Status = "Current"
-		    if (descTextEnable) log.info "You are using the current version of this driver"
-		}
-	
-	      if(state.Status == "Current")
-	      {
-	           state.UpdateInfo = "N/A"
-	           sendEvent(name: "DriverUpdate", value: state.UpdateInfo)
-	           sendEvent(name: "DriverStatus", value: state.Status)
-	      }
-	      else 
-	      {
-	           sendEvent(name: "DriverUpdate", value: state.UpdateInfo)
-	           sendEvent(name: "DriverStatus", value: state.Status)
-	      }
-      }
-      else
-      {
-           log.error "Something went wrong: CHECK THE JSON FILE AND IT'S URI"
-      }
-}
 
 def getThisCopyright(){"&copy; 2019 Your Name "}
